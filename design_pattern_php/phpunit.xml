@@ -1,0 +1,8 @@
+<!-- phpunit.xml -->
+<phpunit bootstrap="configs/init.php">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="_test.php">tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

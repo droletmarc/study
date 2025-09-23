@@ -1,0 +1,13 @@
+{
+  "name": "empty/php",
+  "require": {
+    "php": "^8.2",
+    "phpunit/phpunit": "11.5.39",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}

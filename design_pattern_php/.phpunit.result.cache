@@ -1,0 +1,1 @@
+{"version":2,"defects":{"Tests\\Database_test::test_getInstance":8,"FlightReservation_test::test_priceCalculation":7},"times":{"Tests\\Database_test::test_getInstance":0.001000000000000000020816681711721685132943093776702880859375,"FlightReservation_test::test_priceCalculation":0.0109999999999999993616217608405349892564117908477783203125}}
