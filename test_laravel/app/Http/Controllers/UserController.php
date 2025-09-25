@@ -74,4 +74,10 @@ class UserController extends Controller
             ->withErrors(['email' => 'Invalid credentials'])
             ->onlyInput('email');
     }
+
+    public function random(){
+        $user = User::inRandomOrder()->first();
+
+        return $user->json();
+    }
 }

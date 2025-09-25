@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Validation\Rule;
 use App\Http\Requests\ListingCreateRequest;
+use App\Jobs\ListingCreated;
 
 class ListingController extends Controller
 {
@@ -58,21 +60,14 @@ class ListingController extends Controller
         // to add the user logged relationship to the listing object
         $formFields['user_id'] = auth()->guard()->id();
 
-        Listing::create($formFields);
-        // $listing = new Listing();
-        // $listing->user_id = auth()->guard()->id();
-        // $listing->title = $request->title;
-        // $listing->company = $request->company;
-        // $listing->location = $request->location;
-        // $listing->email = $request->email;
-        // $listing->website = $request->website;
-        // $listing->tags = $request->tags;
-        // $listing->description = $request->description;
-        // $listing->save();
+        $listing = Listing::create($formFields);
+
+        // To send the created event to the queue
+        // Not sure we can use $_ENV here
+        // ListingCreated::dispatch($listing->toArray())->onQueue($_ENV('RABBITMQ_QUEUE'));
 
         // or use the ->with()
         // Session::flash('message', 'my message');
-
 
         return redirect('/')
             ->with('message', 'Listing created successfully!');
@@ -138,5 +133,10 @@ class ListingController extends Controller
             'listings' => auth()->guard()->user()->listings()->get()
             //'listings' => Auth::user()->listings()->get()
         ]);
+    }
+
+    public function like($id, Request $request) {
+        $response = \Http::get('http://test_laravel.local/user/random');
+        return $response->json();
     }
 }
